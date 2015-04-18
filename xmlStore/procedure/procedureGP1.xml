@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureGP1</ID>
+	<procedureCategory>GeneralPractice</procedureCategory>
+	<procedureCode>GP101</procedureCode>
+	<description>Standard Blood Test</description>
+	<paymentAmount>123.00</paymentAmount>
+</procedure>

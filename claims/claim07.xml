@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member4</memberID>
+	<providerID>provider2</providerID>
+	<procedureCode>D402</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a valid dental claim that should be paid</description>
+</claim>

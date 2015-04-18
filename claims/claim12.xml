@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member3</memberID>
+	<providerID>provider3</providerID>
+	<procedureCode>O601</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a non-covered Optometry claim that should be denied</description>
+</claim>

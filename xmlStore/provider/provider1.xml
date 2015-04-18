@@ -1,0 +1,7 @@
+<provider>
+	<ID>provider1</ID>
+	<providerName>Health Care Service</providerName>
+	<category>GeneralPractice</category>
+	<category>Radiology</category>
+	<category>Optometry</category>
+</provider>

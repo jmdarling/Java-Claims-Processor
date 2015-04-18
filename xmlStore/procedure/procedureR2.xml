@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureR2</ID>
+	<procedureCategory>Radiology</procedureCategory>
+	<procedureCode>R202</procedureCode>
+	<description>Hand X-Ray</description>
+	<paymentAmount>353.00</paymentAmount>
+</procedure>

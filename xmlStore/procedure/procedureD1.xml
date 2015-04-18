@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureD1</ID>
+	<procedureCategory>Dental</procedureCategory>
+	<procedureCode>D401</procedureCode>
+	<description>Cleaning</description>
+	<paymentAmount>133.00</paymentAmount>
+</procedure>

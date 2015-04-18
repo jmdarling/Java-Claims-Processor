@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member4</memberID>
+	<providerID>provider1</providerID>
+	<procedureCode>GP101</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a non-covered GeneralPractice claim that should be denied</description>
+</claim>

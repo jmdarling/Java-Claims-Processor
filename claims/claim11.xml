@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member2</memberID>
+	<providerID>provider3</providerID>
+	<procedureCode>D402</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a non-covered Dental claim that should be denied</description>
+</claim>

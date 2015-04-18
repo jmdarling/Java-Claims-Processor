@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member1</memberID>
+	<providerID>provider1</providerID>
+	<procedureCode>R203</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a valid radiology claim that should be paid</description>
+</claim>

@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureO1</ID>
+	<procedureCategory>Optometry</procedureCategory>
+	<procedureCode>O601</procedureCode>
+	<description>Glaucoma Test</description>
+	<paymentAmount>53.00</paymentAmount>
+</procedure>

@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureR3</ID>
+	<procedureCategory>Radiology</procedureCategory>
+	<procedureCode>R203</procedureCode>
+	<description>Leg X-Ray</description>
+	<paymentAmount>333.00</paymentAmount>
+</procedure>

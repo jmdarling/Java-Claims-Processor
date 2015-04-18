@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureO2</ID>
+	<procedureCategory>Optometry</procedureCategory>
+	<procedureCode>O602</procedureCode>
+	<description>Glasses Prescription</description>
+	<paymentAmount>133.00</paymentAmount>
+</procedure>

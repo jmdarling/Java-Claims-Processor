@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureGP2</ID>
+	<procedureCategory>GeneralPractice</procedureCategory>
+	<procedureCode>GP102</procedureCode>
+	<description>Electrocardiogram</description>
+	<paymentAmount>74.00</paymentAmount>
+</procedure>

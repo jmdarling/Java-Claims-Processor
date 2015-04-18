@@ -1,0 +1,8 @@
+<policy>
+	<ID>policy1</ID>
+	<policyState>active</policyState>
+	<category>GeneralPractice</category>
+	<category>Radiology</category>
+	<category>Dental</category>
+	<category>Optometry</category>
+</policy>

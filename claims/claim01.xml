@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member999</memberID>
+	<providerID>provider1</providerID>
+	<procedureCode>GP101</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is rejected claim with invalid member id</description>
+</claim>

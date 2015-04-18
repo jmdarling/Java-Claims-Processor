@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member6</memberID>
+	<providerID>provider1</providerID>
+	<procedureCode>GP101</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a rejected claim from a member with a suspended policy</description>
+</claim>

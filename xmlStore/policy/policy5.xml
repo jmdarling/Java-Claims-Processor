@@ -1,0 +1,8 @@
+<policy>
+	<ID>policy5</ID>
+	<policyState>expired</policyState>
+	<category>GeneralPractice</category>
+	<category>Radiology</category>
+	<category>Dental</category>
+	<category>Optometry</category>
+</policy>

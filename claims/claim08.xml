@@ -1,0 +1,7 @@
+<claim>
+	<memberID>member4</memberID>
+	<providerID>provider3</providerID>
+	<procedureCode>O601</procedureCode>
+	<replyTo>changeMe@domain.com</replyTo>
+	<description>This is a valid optometry claim that should be paid</description>
+</claim>

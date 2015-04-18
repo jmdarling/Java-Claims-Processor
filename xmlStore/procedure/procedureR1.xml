@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureR1</ID>
+	<procedureCategory>Radiology</procedureCategory>
+	<procedureCode>R201</procedureCode>
+	<description>Chest X-Ray</description>
+	<paymentAmount>313.00</paymentAmount>
+</procedure>

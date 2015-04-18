@@ -1,0 +1,8 @@
+<policy>
+	<ID>policy6</ID>
+	<policyState>suspended</policyState>
+	<category>GeneralPractice</category>
+	<category>Radiology</category>
+	<category>Dental</category>
+	<category>Optometry</category>
+</policy>

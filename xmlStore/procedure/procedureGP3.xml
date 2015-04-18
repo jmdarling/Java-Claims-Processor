@@ -1,0 +1,7 @@
+<procedure>
+	<ID>procedureGP3</ID>
+	<procedureCategory>GeneralPractice</procedureCategory>
+	<procedureCode>GP103</procedureCode>
+	<description>Physical Checkup</description>
+	<paymentAmount>133.00</paymentAmount>
+</procedure>
