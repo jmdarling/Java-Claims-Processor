@@ -11,48 +11,48 @@ import javax.jms.Session;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import utd.claimsProcessing.dao.ProviderDAO;
+import utd.claimsProcessing.dao.PolicyDAO;
 import utd.claimsProcessing.domain.Claim;
 import utd.claimsProcessing.domain.ClaimFolder;
-import utd.claimsProcessing.domain.Provider;
+import utd.claimsProcessing.domain.Policy;
 import utd.claimsProcessing.domain.RejectedClaimInfo;
 
 /**
- * A message processor responsible for retrieving the Provider identified by the Claim
- * from the ProviderDAO. The retrieved provider is attached to the ClaimFolder before
+ * A message processor responsible for retrieving the Policy identified by the Claim
+ * from the PolicyDAO. The retrieved policy is attached to the ClaimFolder before
  * passing to the next step in the process. 
  */
 
-public class RetrieveProviderProcessor extends MessageProcessor implements MessageListener
+public class RetrievePolicyProcessor extends MessageProcessor implements MessageListener
 {
-	private final static Logger logger = Logger.getLogger(RetrieveProviderProcessor.class);
+	private final static Logger logger = Logger.getLogger(RetrievePolicyProcessor.class);
 	
 	private MessageProducer producer;
 	
-	public RetrieveProviderProcessor(Session session)
+	public RetrievePolicyProcessor(Session session)
 	{
 		super(session);
 	}
 
 	public void initialize() throws JMSException
 	{
-		Queue queue = getSession().createQueue(QueueNames.retrievePolicy);
+		Queue queue = getSession().createQueue(QueueNames.retrieveProcedure);
 		producer = getSession().createProducer(queue);
 	}
 
 	public void onMessage(Message message)
 	{
-		logger.debug("RetrieveProviderProcessor ReceivedMessage");
+		logger.debug("RetrievePolicyProcessor ReceivedMessage");
 
 		try {
 			Object object = ((ObjectMessage) message).getObject();
 			ClaimFolder claimFolder = (ClaimFolder)object;
 			
-			String providerID = claimFolder.getClaim().getProviderID();
-			Provider provider = ProviderDAO.getSingleton().retrieveProvider(providerID);
-			if(provider == null) {
+			String policyID = claimFolder.getMember().getPolicyID();
+			Policy policy = PolicyDAO.getSingleton().retrievePolicy(policyID);
+			if(policy == null) {
 				Claim claim = claimFolder.getClaim();
-				RejectedClaimInfo rejectedClaimInfo = new RejectedClaimInfo("Provider Not Found: " + providerID);
+				RejectedClaimInfo rejectedClaimInfo = new RejectedClaimInfo("Policy Not Found: " + policyID);
 				claimFolder.setRejectedClaimInfo(rejectedClaimInfo);
 				if(!StringUtils.isBlank(claim.getReplyTo())) {
 					rejectedClaimInfo.setEmailAddr(claim.getReplyTo());
@@ -60,17 +60,17 @@ public class RetrieveProviderProcessor extends MessageProcessor implements Messa
 				rejectClaim(claimFolder);
 			}
 			else {
-				logger.debug("Found Provider: " + provider.getProviderName());
+				logger.debug("Found Policy: " + policy.getID());
 
-				claimFolder.setProvider(provider);
+				claimFolder.setPolicy(policy);
 			
 				Message claimMessage = getSession().createObjectMessage(claimFolder);
 				producer.send(claimMessage);
-				logger.debug("Finished Sending: " + provider.getProviderName());
+				logger.debug("Finished Sending: " + policy.getID());
 			}
 		}
 		catch (Exception ex) {
-			logError("RetrieveProviderProcessor.onMessage() " + ex.getMessage(), ex);
+			logError("RetrievePolicyProcessor.onMessage() " + ex.getMessage(), ex);
 		}
 	}
 }
