@@ -14,7 +14,9 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.log4j.Logger;
 
 import utd.claimsProcessing.messageProcessors.BuildClaimsFolderProcessor;
+import utd.claimsProcessing.messageProcessors.DentalClaimProcessor;
 import utd.claimsProcessing.messageProcessors.DenyClaimsProcessor;
+import utd.claimsProcessing.messageProcessors.GeneralPracticeClaimProcessor;
 import utd.claimsProcessing.messageProcessors.MessageProcessor;
 import utd.claimsProcessing.messageProcessors.OptometryClaimProcessor;
 import utd.claimsProcessing.messageProcessors.PaymentProcessor;
@@ -87,8 +89,8 @@ public class ClaimsProcessingApp implements ExceptionListener
 		
 		installProcessor(new RouteClaimProcessor(session), QueueNames.routeClaim);
 		
-		//TODO: Create General
-		//TODO: Create Dental
+		installProcessor(new GeneralPracticeClaimProcessor(session), QueueNames.processGPClaim);
+		installProcessor(new DentalClaimProcessor(session), QueueNames.processDentalClaim);
 		installProcessor(new OptometryClaimProcessor(session), QueueNames.processOptometryClaim);
 		installProcessor(new RadiologyClaimProcessor(session), QueueNames.processRadiologyClaim);
 
