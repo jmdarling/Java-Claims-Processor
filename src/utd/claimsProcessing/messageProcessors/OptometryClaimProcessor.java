@@ -3,13 +3,12 @@ package utd.claimsProcessing.messageProcessors;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
 import javax.jms.Session;
+
 import org.apache.log4j.Logger;
+
 import utd.claimsProcessing.domain.ClaimFolder;
-import utd.claimsProcessing.domain.PolicyState;
 import utd.claimsProcessing.domain.ProcedureCategory;
 
 
@@ -19,22 +18,18 @@ import utd.claimsProcessing.domain.ProcedureCategory;
  * passing to the next step in the process. 
  */
 
-public class OptometryClaimProcessor extends MessageProcessor implements MessageListener
+public class OptometryClaimProcessor extends AbstractProcedureProcessor implements MessageListener
 {
-	private final static Logger logger = Logger.getLogger(RetrieveProcedureProcessor.class);
+	private final static Logger logger = Logger.getLogger(OptometryClaimProcessor.class);
 	
-	private MessageProducer payOrDenyProducer;
+	//private MessageProducer payOrDenyProducer;
 	
 	public OptometryClaimProcessor(Session session)
 	{
 		super(session);
 	}
 
-	public void initialize() throws JMSException
-	{
-
-	}
-
+	@Override
 	public void onMessage(Message message)
 	{
 		  logger.debug("OptometryClaimProcessor ReceivedMessage");
@@ -43,30 +38,31 @@ public class OptometryClaimProcessor extends MessageProcessor implements Message
 		  {
 		    Object object = ((ObjectMessage) message).getObject();
 		    ClaimFolder claimFolder = (ClaimFolder) object;
-		    Message claimMessage = getSession().createObjectMessage(claimFolder);
+		    //Message claimMessage = getSession().createObjectMessage(claimFolder);
 
-		    if(validPolicy(claimFolder) && validProcedure(claimFolder, ProcedureCategory.Optometry)) 
+		    if(validatePolicy(claimFolder) && validateProcedure(claimFolder, ProcedureCategory.Optometry)) 
 		    {  
-		        
-		          payOrDenyProducer = getSession().createProducer(getSession().createQueue(QueueNames.payClaim));
-		          payOrDenyProducer.send(claimMessage);
-		        
+		    	
+				Message claimMessage = getSession().createObjectMessage(claimFolder);
+				denyProducer.send(claimMessage);
+	    	    
 		    }
 		    else
 		    {
-		    	  payOrDenyProducer = getSession().createProducer(getSession().createQueue(QueueNames.denyClaim));
-			      payOrDenyProducer.send(claimMessage);
+		    	
+				Message claimMessage = getSession().createObjectMessage(claimFolder);
+				denyProducer.send(claimMessage);
 		    }
 		  }
 		  
 		  catch (Exception ex) 
 		  {
-			  	 logError("OptometryClaimProcessor.onMessage() " + ex.getMessage(), ex);
+			  	logError("OptometryClaimProcessor.onMessage() " + ex.getMessage(), ex);
 		  }
 
 	}
 
-	private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory optometry) 
+	/*private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory optometry) 
 	{
 		logger.debug(String.format("Validating Optometry procedure for policy {0}, claim {1}",claimFolder.getPolicy().getID(), claimFolder.getClaimID()));
 		
@@ -79,7 +75,7 @@ public class OptometryClaimProcessor extends MessageProcessor implements Message
 		logger.debug(String.format("Validating policy for policy {0}", claimFolder.getPolicy().getID()));
 
 		return claimFolder.getPolicy().getPolicyState() == PolicyState.active;
-	}
+	}*/
 }
 
 

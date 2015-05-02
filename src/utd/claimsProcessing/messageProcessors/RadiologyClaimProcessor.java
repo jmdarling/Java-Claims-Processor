@@ -3,13 +3,12 @@ package utd.claimsProcessing.messageProcessors;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
 import javax.jms.Session;
+
 import org.apache.log4j.Logger;
+
 import utd.claimsProcessing.domain.ClaimFolder;
-import utd.claimsProcessing.domain.PolicyState;
 import utd.claimsProcessing.domain.ProcedureCategory;
 
 
@@ -19,22 +18,18 @@ import utd.claimsProcessing.domain.ProcedureCategory;
  * passing to the next step in the process. 
  */
 
-public class RadiologyClaimProcessor extends MessageProcessor implements MessageListener
+public class RadiologyClaimProcessor  extends AbstractProcedureProcessor  implements MessageListener
 {
-	private final static Logger logger = Logger.getLogger(RetrieveProcedureProcessor.class);
+	private final static Logger logger = Logger.getLogger(RadiologyClaimProcessor.class);
 	
-	private MessageProducer payOrDenyProducer;
+	//private MessageProducer payOrDenyProducer;
 	
 	public RadiologyClaimProcessor(Session session)
 	{
 		super(session);
 	}
 
-	public void initialize() throws JMSException
-	{
-
-	}
-
+	@Override
 	public void onMessage(Message message)
 	{
 		  logger.debug("RadiologyClaimProcessor ReceivedMessage");
@@ -43,19 +38,19 @@ public class RadiologyClaimProcessor extends MessageProcessor implements Message
 		  {
 		    Object object = ((ObjectMessage) message).getObject();
 		    ClaimFolder claimFolder = (ClaimFolder) object;
-		    Message claimMessage = getSession().createObjectMessage(claimFolder);
-
-		    if(validPolicy(claimFolder) && validProcedure(claimFolder, ProcedureCategory.Radiology)) 
+		   
+		    if(validatePolicy(claimFolder) && validateProcedure(claimFolder, ProcedureCategory.Radiology)) 
 		    {  
-		        
-		          payOrDenyProducer = getSession().createProducer(getSession().createQueue(QueueNames.payClaim));
-		          payOrDenyProducer.send(claimMessage);
+		    	
+				Message claimMessage = getSession().createObjectMessage(claimFolder);
+				denyProducer.send(claimMessage);
 		        
 		    }
 		    else
 		    {
-		    	  payOrDenyProducer = getSession().createProducer(getSession().createQueue(QueueNames.denyClaim));
-			      payOrDenyProducer.send(claimMessage);
+		    	
+				Message claimMessage = getSession().createObjectMessage(claimFolder);
+				denyProducer.send(claimMessage);
 		    }
 		  }
 		  
@@ -66,7 +61,7 @@ public class RadiologyClaimProcessor extends MessageProcessor implements Message
 
 	}
 
-	private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory radiology) 
+	/*private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory radiology) 
 	{
 		logger.debug(String.format("Validating Radiology Claim ID {0}", claimFolder.getClaimID()));
 		
@@ -79,7 +74,7 @@ public class RadiologyClaimProcessor extends MessageProcessor implements Message
 		logger.debug(String.format("Validating policy for Radiology Claim ID {0}", claimFolder.getClaimID()));
 
 		return claimFolder.getPolicy().getPolicyState() == PolicyState.active;
-	}
+	}*/
 }
 
 
