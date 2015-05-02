@@ -44,7 +44,7 @@ public class OptometryClaimProcessor extends AbstractProcedureProcessor implemen
 		    {  
 		    	
 				Message claimMessage = getSession().createObjectMessage(claimFolder);
-				denyProducer.send(claimMessage);
+				paymentProducer.send(claimMessage);
 	    	    
 		    }
 		    else
@@ -62,20 +62,6 @@ public class OptometryClaimProcessor extends AbstractProcedureProcessor implemen
 
 	}
 
-	/*private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory optometry) 
-	{
-		logger.debug(String.format("Validating Optometry procedure for policy {0}, claim {1}",claimFolder.getPolicy().getID(), claimFolder.getClaimID()));
-		
-		return claimFolder.getPolicy().getCategories().contains(optometry);
-		
-	}
-
-	private boolean validPolicy(ClaimFolder claimFolder) 
-	{
-		logger.debug(String.format("Validating policy for policy {0}", claimFolder.getPolicy().getID()));
-
-		return claimFolder.getPolicy().getPolicyState() == PolicyState.active;
-	}*/
 }
 
 

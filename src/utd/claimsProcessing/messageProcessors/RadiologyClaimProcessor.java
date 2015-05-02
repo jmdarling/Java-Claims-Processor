@@ -43,7 +43,7 @@ public class RadiologyClaimProcessor  extends AbstractProcedureProcessor  implem
 		    {  
 		    	
 				Message claimMessage = getSession().createObjectMessage(claimFolder);
-				denyProducer.send(claimMessage);
+				paymentProducer.send(claimMessage);
 		        
 		    }
 		    else
@@ -61,20 +61,7 @@ public class RadiologyClaimProcessor  extends AbstractProcedureProcessor  implem
 
 	}
 
-	/*private boolean validProcedure(ClaimFolder claimFolder,ProcedureCategory radiology) 
-	{
-		logger.debug(String.format("Validating Radiology Claim ID {0}", claimFolder.getClaimID()));
-		
-		return claimFolder.getPolicy().getCategories().contains(radiology);
-		
-	}
 
-	private boolean validPolicy(ClaimFolder claimFolder) 
-	{
-		logger.debug(String.format("Validating policy for Radiology Claim ID {0}", claimFolder.getClaimID()));
-
-		return claimFolder.getPolicy().getPolicyState() == PolicyState.active;
-	}*/
 }
 
 
