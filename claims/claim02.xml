@@ -2,6 +2,6 @@
 	<memberID>member1</memberID>
 	<providerID>provider999</providerID>
 	<procedureCode>GP101</procedureCode>
-	<replyTo>changeMe@domain.com</replyTo>
+	<replyTo>jmdarling.tx@gmail.com</replyTo>
 	<description>This is a rejected claim with an invalid provider id</description>
 </claim>
